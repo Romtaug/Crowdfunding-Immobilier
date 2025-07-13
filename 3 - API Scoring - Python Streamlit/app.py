@@ -475,7 +475,7 @@ elif page == "Scraping de données":
                 height=min(600, 22 * df_scraped.shape[1]),
             )
         except Exception as e:
-            st.error(f"❌ Une erreur est survenue pendant le scraping, tester le programme en local ou réessayez plus tard")
+            st.error(f"❌ Une erreur est survenue pendant le scraping, testez le programme en local ou réessayez plus tard.")
 
 
 # C. Batch prédictions

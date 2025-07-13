@@ -394,14 +394,14 @@ elif page == "Mode d'emploi":
 ### Scraping en bref
 1. `get_driver()` lance Edge (Chromium).  
 2. Cookies acceptés, login automatique.  
-3. Dès que la première balise du site est visible, on passe la page à `BeautifulSoup`.  
+3. Dès que la première balise du site est visible, on passe la page à `BeautifulSoup`
 4. `parse()` pioche l’ID, la ville, le département, les montants, la barre de progression, le JSON *data-layer*, etc.  
 5. On retourne un `DataFrame` normalisé : **même fonction** pour l’interface et les scripts batch.
 
 ### Modèle ML
 * **DataPrep** maintient la cohérence (moyennes, catégories, encodage) entre entraînement et production.  
-* `OptunaSearchCV` explore 8 hyperparamètres ⇒ ~600 fits (10 folds). Score : `f1_macro`.  
-* Artefacts sauvegardés : `preprocess.pkl`, `xgb_model.pkl`, `labels.pkl`.
+* `OptunaSearchCV` explore 8 hyperparamètres ⇒ ~600 fits (10 folds). Score : `f1_macro`
+* Artefacts sauvegardés : `preprocess.pkl` `xgb_model.pkl` `labels.pkl`
 
 ---
 

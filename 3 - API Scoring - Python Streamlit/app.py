@@ -443,6 +443,7 @@ elif page == "Scraping de données":
 
     st.markdown(
         """ 
+
 ### Comment scraper un projet La Première Brique ?
 
 1. Allez sur la page officielle des projets : [https://app.lapremierebrique.fr/fr/projects](https://app.lapremierebrique.fr/fr/projects)
@@ -457,59 +458,30 @@ elif page == "Scraping de données":
         value="https://app.lapremierebrique.fr/fr/projects/20",
     )
 
-    def scrape_one_url(url):
-        try:
-            opts = EdgeOptions()
-            opts.add_argument("--headless")
-            opts.add_argument("--disable-gpu")
-            opts.add_argument("--no-sandbox")
-            opts.add_argument("--disable-dev-shm-usage")
-
-            drv = webdriver.Edge(
-                service=EdgeService(EdgeChromiumDriverManager().install()),
-                options=opts,
-            )
-            drv.get(url)
-            time.sleep(3)
-
-            html = drv.page_source
-            drv.quit()
-
-            soup = BeautifulSoup(html, "html.parser")
-
-            data = {}
-            title_tag = soup.find("h1")
-            data["Nom du projet"] = title_tag.text.strip() if title_tag else "Non trouvé"
-
-            desc_tag = soup.find("meta", {"name": "description"})
-            data["Description"] = desc_tag["content"] if desc_tag else "Non trouvée"
-
-            return pd.DataFrame([data])
-
-        except Exception as e:
-            return None
-
     if st.button("Scraper"):
         if not input_url:
             st.error("Merci de fournir une URL.")
             st.stop()
 
+        # Validation stricte de l'URL LPB
         pattern = r"^https://app\.lapremierebrique\.fr/fr/projects/\d+$"
         if not re.match(pattern, input_url.strip()):
             st.error("❌ L’URL fournie ne correspond pas au format attendu d’un projet LPB.")
             st.stop()
 
-        st.info("🔍 Chargement de la page et scraping...")
-
+        # 1) Scraping brut -------------------------------------------------
         df_scraped = scrape_one_url(input_url)
-
         if df_scraped is None:
-            st.error("❌ Le scraping a échoué. Vérifie l’URL ou réessaie plus tard.")
+            st.error("Le projet n’a pas pu être extrait. Vérifiez l’URL ou réessayez plus tard.")
             st.stop()
 
-        st.success("✅ Scraping réussi !")
-        st.subheader("Colonnes récupérées")
-        st.dataframe(df_scraped.T, use_container_width=True)
+        st.subheader("Colonnes récupérées (scraping brut)")
+        st.dataframe(
+            df_scraped.T,
+            use_container_width=True,
+            height=min(600, 22 * df_scraped.shape[1]),
+        )
+
 
 
 # C. Batch prédictions

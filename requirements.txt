@@ -1,7 +1,7 @@
 streamlit
 pandas
-numpy
-scikit-learn
 openpyxl
+scikit-learn
+beautifulsoup4
+selenium
 xlsxwriter
-pathlib

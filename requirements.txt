@@ -1,0 +1,22 @@
+# cœur Streamlit
+streamlit==1.34.0          # UI
+
+# data / manipulation
+pandas==2.2.2
+numpy==1.26.4              # pin pour compat XGBoost < 2.1
+
+# scraping
+beautifulsoup4==4.12.3
+selenium==4.21.0           # ✅ dernière 4.x, ok avec MS Edge 124+
+webdriver-manager==4.0.1   # installe/dl le driver au runtime
+
+# machine learning
+xgboost==2.0.3             # gagne ~30 % de perf vs 1.7.x
+scikit-learn==1.4.2        # requis par OptunaSearchCV
+
+# optimisation bayésienne
+optuna==3.6.1
+optuna-integration==3.6.1  # contient OptunaSearchCV & callbacks
+
+# visualisation (facultatif mais pratique)
+matplotlib==3.8.4

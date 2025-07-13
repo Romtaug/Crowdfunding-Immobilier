@@ -429,14 +429,6 @@ Les dossiers du projet sont disponibles ici : **[GitHub – Crowdfunding Immobil
         unsafe_allow_html=True,
     )
 
-from selenium import webdriver
-from selenium.webdriver.edge.service import Service as EdgeService
-from selenium.webdriver.edge.options import Options as EdgeOptions
-from webdriver_manager.microsoft import EdgeChromiumDriverManager
-from bs4 import BeautifulSoup
-import time
-import pandas as pd
-import re
 
 elif page == "Scraping de données":
     st.header("🕵️‍♂️ Scraping de données")
@@ -481,9 +473,6 @@ elif page == "Scraping de données":
             use_container_width=True,
             height=min(600, 22 * df_scraped.shape[1]),
         )
-
-
-
 # C. Batch prédictions
 else:
     st.header("🤖 Batch prédictions")

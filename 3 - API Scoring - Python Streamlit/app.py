@@ -461,18 +461,23 @@ elif page == "Scraping de données":
             st.error("❌ L’URL fournie ne correspond pas au format attendu d’un projet LPB.")
             st.stop()
 
-        # 1) Scraping brut -------------------------------------------------
-        df_scraped = scrape_one_url(input_url)
-        if df_scraped is None:
-            st.error("Le projet n’a pas pu être extrait. Vérifiez l’URL ou réessayez plus tard.")
-            st.stop()
+        try:
+            # 1) Scraping brut -------------------------------------------------
+            df_scraped = scrape_one_url(input_url)
+            if df_scraped is None:
+                st.error("Le projet n’a pas pu être extrait. Vérifiez l’URL ou réessayez plus tard.")
+                st.stop()
 
-        st.subheader("Colonnes récupérées (scraping brut)")
-        st.dataframe(
-            df_scraped.T,
-            use_container_width=True,
-            height=min(600, 22 * df_scraped.shape[1]),
-        )
+            st.subheader("Colonnes récupérées (scraping brut)")
+            st.dataframe(
+                df_scraped.T,
+                use_container_width=True,
+                height=min(600, 22 * df_scraped.shape[1]),
+            )
+        except Exception as e:
+            st.error(f"❌ Une erreur est survenue pendant le scraping : {e}")
+
+
 # C. Batch prédictions
 else:
     st.header("🤖 Batch prédictions")

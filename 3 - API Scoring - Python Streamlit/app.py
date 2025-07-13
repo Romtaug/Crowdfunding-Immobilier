@@ -37,12 +37,13 @@ st.set_page_config(
     layout="wide",
 )
 # ╰─────────────────────────────────────────────╯
-
+email_auth = st.secrets["auth"]["email"]
+password_auth = st.secrets["auth"]["password"]
 
 # ╭────────── 1. Selenium (login LPB) ──────────╮
-EMAIL = "romtaug@gmail.com"
-PASSWORD = "CasentleRORO92i*"
-TIMEOUT, HEADLESS = 20, True
+EMAIL = st.secrets["auth"]["email"]
+PASSWORD = st.secrets["auth"]["password"]
+TIMEOUT, HEADLESS = 5, True
 
 @st.cache_resource(show_spinner="⌛ Connexion à LPB…")
 def get_driver() -> webdriver.Edge:

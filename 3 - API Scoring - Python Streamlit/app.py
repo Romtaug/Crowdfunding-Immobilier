@@ -486,29 +486,44 @@ Chargez un fichier `.xlsx` ou `.csv` contenant plusieurs projets LPB à scorer a
 Voici le fichier issu du scraping avec les projets récents (après le changement de la structure du code) :
 """)
 
+    import os
+    import pathlib
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(BASE_DIR, "Projets.xlsx")
+
     # 🔹 Bouton de téléchargement du fichier d'exemple
-    try:
-        with open("Projets.xlsx", "rb") as f:
+    if os.path.exists(file_path):
+        with open(file_path, "rb") as f:
             st.download_button(
                 label="📥 Télécharger le fichier d'exemple Projets.xlsx",
                 data=f,
                 file_name="Projets.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
-    except FileNotFoundError:
+    else:
         st.warning("⚠️ Le fichier `Projets.xlsx` n’a pas été trouvé dans le dossier courant.")
 
     # 🔹 Uploader (drag and drop possible)
     up = st.file_uploader("Déposez ici un fichier à scorer (ou laissez vide pour charger Projets.xlsx)", type=["xlsx", "csv"])
 
     # 🔹 Lecture du fichier (priorité au drag & drop)
+    df_new = None
     if up is not None:
         ext = pathlib.Path(up.name).suffix.lower()
-        df_new = pd.read_excel(up) if ext == ".xlsx" else pd.read_csv(up, sep=None, engine="python")
-        st.info("Fichier chargé depuis le drag-and-drop.")
-    elif os.path.exists("Projets.xlsx"):
-        df_new = pd.read_excel("Projets.xlsx")
-        st.info("Le fichier `Projets.xlsx` a été chargé automatiquement depuis le dossier local.")
+        try:
+            df_new = pd.read_excel(up) if ext == ".xlsx" else pd.read_csv(up, sep=None, engine="python")
+            st.info("Fichier chargé depuis le drag-and-drop.")
+        except Exception as e:
+            st.error(f"Erreur lors de la lecture du fichier : {e}")
+            st.stop()
+    elif os.path.exists(file_path):
+        try:
+            df_new = pd.read_excel(file_path)
+            st.info("Le fichier `Projets.xlsx` a été chargé automatiquement depuis le dossier local.")
+        except Exception as e:
+            st.error(f"Erreur lors de la lecture du fichier local : {e}")
+            st.stop()
     else:
         st.warning("❌ Aucun fichier trouvé. Veuillez déposer un fichier ou ajouter `Projets.xlsx` dans le dossier.")
         st.stop()

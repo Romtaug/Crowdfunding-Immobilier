@@ -485,7 +485,7 @@ else:
     st.markdown("""
 ### Prédire plusieurs projets en une fois
 
-Chargez un fichier `.xlsx` ou `.csv` contenant plusieurs projets LPB à scorer automatiquement.
+Chargez un fichier `.xlsx` ou `.csv` contenant plusieurs projets LPB à scorer automatiquement. Vous obtiendrez grâce à notre modèle bien entraîné la classe prédite et la fiabilité de prédiction du projet.
 
 Voici le fichier issu du scraping avec les projets récents (après le changement de la structure du code) :
 """)

@@ -294,8 +294,8 @@ DATA_XLSX  = ROOT / "Projets.xlsx"          # pour prédiction par ID
 PNG = {
     "KPI global":           IMG_DIR / "accuracy_kpi.png",
     "Matrice de confusion": IMG_DIR / "confusion_matrix.png",
-    "Top 15 importances":   IMG_DIR / "top15_features.png",
     "Accuracy par classe":  IMG_DIR / "accuracy_par_classe.png",
+    "Top 15 importances":   IMG_DIR / "top15_features.png",
     "Arbre simplifié":      IMG_DIR / "arbre_decision_simplifie.png",
     "Learning curve":       IMG_DIR / "xgb_learning_curve.png",
 }

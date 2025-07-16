@@ -292,7 +292,7 @@ LABELS_PKL = OUT_DIR / "labels.pkl"
 DATA_XLSX  = ROOT / "Projets.xlsx"          # pour prédiction par ID
 
 PNG = {
-    "Accuracy global":           IMG_DIR / "accuracy_kpi.png",
+    "KPI global":           IMG_DIR / "accuracy_kpi.png",
     "Matrice de confusion": IMG_DIR / "confusion_matrix.png",
     "Top 15 importances":   IMG_DIR / "top15_features.png",
     "Accuracy par classe":  IMG_DIR / "accuracy_par_classe.png",
